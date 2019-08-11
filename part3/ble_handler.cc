@@ -135,6 +135,7 @@ void ble_handle_events(){
          .rx_phys = BLE_GAP_PHY_1MBPS
         };
         sd_ble_gap_phy_update(event->evt.gap_evt.conn_handle, &phys);
+        break;
         }
 
       case BLE_GAP_EVT_PHY_UPDATE:
