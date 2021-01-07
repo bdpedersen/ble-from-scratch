@@ -65,7 +65,7 @@ void ble_start(){
 
   // Set up the four configurations
   CHK_ERR(sd_ble_cfg_set( BLE_CONN_CFG_GAP, &link1_cfg, app_ram_base));
-  CHK_ERR(sd_ble_cfg_set( BLE_CONN_CFG_GATTS, &att_cfg, app_ram_base));
+  CHK_ERR(sd_ble_cfg_set( BLE_CONN_CFG_GATT, &att_cfg, app_ram_base));
   CHK_ERR(sd_ble_cfg_set( BLE_GAP_CFG_ROLE_COUNT, &link2_cfg, app_ram_base));
   CHK_ERR(sd_ble_cfg_set( BLE_GAP_CFG_DEVICE_NAME, &name_cfg, app_ram_base));
 

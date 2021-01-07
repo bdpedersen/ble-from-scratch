@@ -30,7 +30,7 @@
       linker_output_format="hex"
       linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
       linker_section_placement_macros="FLASH_START=0x0;FLASH_SIZE=0x80000;RAM_START=0x20000000;RAM_SIZE=0x10000;FLASH_SD=0x19000;RAM_SD=0x3000"
-      macros="DeviceHeaderFile=$(PackagesDir)/nRF/CMSIS/Device/Include/nrf.h;DeviceLibraryIdentifier=M4lf;DeviceSystemFile=$(PackagesDir)/nRF/CMSIS/Device/Source/system_nrf52.c;DeviceVectorsFile=$(PackagesDir)/nRF/Source/ses_nrf52_Vectors.s;DeviceFamily=nRF;Target=nRF52832_xxAA;Placement=Flash;SoftdeviceDir=C:/nrf/nRF5_SDK_15.3.0_59ac345/components/softdevice/s112"
+      macros="DeviceHeaderFile=$(PackagesDir)/nRF/CMSIS/Device/Include/nrf.h;DeviceLibraryIdentifier=M4lf;DeviceSystemFile=$(PackagesDir)/nRF/CMSIS/Device/Source/system_nrf52.c;DeviceVectorsFile=$(PackagesDir)/nRF/Source/ses_nrf52_Vectors.s;DeviceFamily=nRF;Target=nRF52832_xxAA;Placement=Flash;SoftdeviceDir=/Users/brian/src/ext/nRF5_SDK_17.0.2_d674dde/components/softdevice/s112"
       project_directory=""
       project_type="Executable"
       target_reset_script="Reset();"
