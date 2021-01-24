@@ -63,7 +63,14 @@ Purpose : Generic application start
 *   Application entry point.
 */
 
+#include "DeviceInfo.h"
+#include "ui_service.h"
+#include "ble_handler.h"
 
+void ble_register_services(){
+  install_deviceinfo();
+  install_ui_service();
+}
 
 int main(void) {
   // Start the softdevice with RC oscillator LF clock

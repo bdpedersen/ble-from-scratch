@@ -38,7 +38,7 @@ const ble_gatts_char_md_t readonly = {
   */
 };
 
-const ble_gatts_attr_md_t public_readonly_attr_md = {
+extern const ble_gatts_attr_md_t public_readonly_attr_md = {
   .read_perm = {
     .sm = 1,
     .lv = 1

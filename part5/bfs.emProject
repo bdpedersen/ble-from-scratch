@@ -58,23 +58,29 @@
     </folder>
     <folder Name="Source Files">
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
-      <file file_name="ble_adv.h" />
-      <file file_name="ble_handler.h" />
       <folder Name="Helpers">
         <file file_name="err_handler.h" />
         <file file_name="adv_helper.h" />
         <file file_name="err_handler.cc" />
         <file file_name="bfs_alloca.h" />
       </folder>
-      <file file_name="ble_adv.cc" />
-      <file file_name="uuids.cc" />
-      <file file_name="ble_handler.cc" />
-      <file file_name="main.cc" />
-      <file file_name="uuids.h" />
-      <file file_name="ble_adv_data.cc" />
-      <file file_name="ble_adv_data.h" />
-      <file file_name="DeviceInfo.cc" />
-      <file file_name="DeviceInfo.h" />
+      <folder Name="Core">
+        <file file_name="ble_adv.cc" />
+        <file file_name="ble_adv.h" />
+        <file file_name="ble_handler.cc" />
+        <file file_name="ble_handler.h" />
+        <file file_name="ble_adv_data.h" />
+      </folder>
+      <folder Name="Config">
+        <file file_name="ble_adv_data.cc" />
+        <file file_name="DeviceInfo.cc" />
+        <file file_name="DeviceInfo.h" />
+        <file file_name="main.cc" />
+        <file file_name="ui_service.cc" />
+        <file file_name="uuids.cc" />
+        <file file_name="uuids.h" />
+        <file file_name="ui_service.h" />
+      </folder>
     </folder>
     <folder Name="System Files">
       <file file_name="thumb_crt0.s" />
@@ -85,7 +91,7 @@
     </folder>
     <configuration
       Name="Debug"
-      gcc_cplusplus_language_standard="c++14"
+      gcc_cplusplus_language_standard="gnu++14"
       gcc_optimization_level="Debug" />
     <configuration
       Name="Release"

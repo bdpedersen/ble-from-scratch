@@ -115,7 +115,9 @@ public:
     }
   }
 
-
+  uint16_t shortform(void){
+    return (uint16_t)data[13] << 8 | data[12];
+  }
 };
 
 class ServiceUUIDs : public AdvData {

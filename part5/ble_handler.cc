@@ -13,6 +13,8 @@
 #include "DeviceInfo.h"
 
 
+//Dead chicken to allow for the nvic functions to be used
+nrf_nvic_state_t nrf_nvic_state = {0};
 
 
 const int MAX_ATT_MTU = 131; // bytes
@@ -22,6 +24,25 @@ const int ADV_INTERVAL = 200; // ms
 extern uint8_t __app_ram_start__; // Magic variable that points to the start segment for the application - see the section layout file for declaration
 
 static uint32_t app_ram_base=(uint32_t)(&__app_ram_start__);
+
+// GATT default write handler
+void null_handler(ble_gatts_evt_write_t& evt){
+  char str[80];
+  uint16_t hndl = evt.handle;
+  uint16_t uuid = evt.uuid.uuid;
+  sprintf(str,"Unhandled write to handle %d (uuid = 0x%X) \n",hndl,uuid);
+  INFO(str);
+
+}
+
+static write_handler_t write_handler = null_handler;
+
+write_handler_t chain_write_handler(write_handler_t new_handler){
+  write_handler_t old_handler = write_handler;
+  write_handler = new_handler;
+  return old_handler;
+}
+
 
 // Start the BLE stack
 void ble_start(){
@@ -94,8 +115,7 @@ void ble_start(){
   // Initialize advertisement
   ble_adv_configure(ADV_INTERVAL);
 
-
-  install_deviceinfo();
+  ble_register_services();
 
   sd_ble_gatts_initial_user_handle_get(&hndl);
   sprintf(str,"Initial handle after install is %d\n",hndl);
@@ -112,10 +132,15 @@ constexpr inline int bytes2words(int x){
   return r;
 }
 
+static uint16_t _conn_handle = 0xFFFF;
+
+uint16_t ble_conn_handle(){
+  return _conn_handle;
+}
 
 
 // Handle events in thread mode
-void ble_handle_events(){
+void _ble_handle_events(){
 
     
     uint16_t event_len;
@@ -140,10 +165,12 @@ void ble_handle_events(){
         ble_adv_configure(0x20);
         ble_adv_start();
         INFO("Disconnected, Advertising restarted");
+        _conn_handle = 0xFFFF;
         break;
 
       case BLE_GAP_EVT_CONNECTED:
         INFO("Device connected, Advertising stopped");
+        _conn_handle = event->evt.common_evt.conn_handle;
         break;
 
       case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
@@ -189,12 +216,16 @@ void ble_handle_events(){
 
       case BLE_GATTS_EVT_WRITE:
       {
-        uint16_t hndl = event->evt.gatts_evt.params.write.handle;
-        uint16_t uuid = event->evt.gatts_evt.params.write.uuid.uuid;
-        sprintf(str,"Detected write to handle %d (uuid = 0x%X) \n",hndl,uuid);
-        INFO(str);
+        write_handler(event->evt.gatts_evt.params.write);
       }
       break;
+
+      case BLE_GATTS_EVT_SYS_ATTR_MISSING:
+      {
+        // For now respond with system attribute missing
+        sd_ble_gatts_sys_attr_set(_conn_handle,NULL,0,0);
+        break;
+      }
  
       default:
         sprintf(str,"Event 0x%x received with length %d\n",event->header.evt_id, event_len);
@@ -203,4 +234,13 @@ void ble_handle_events(){
       }
 
     }
+}
+
+// Trampoline for pluggable mainloop
+mainloop_func_t ble_handle_events = _ble_handle_events;
+
+mainloop_func_t chain_mainloop_func(mainloop_func_t new_loop){
+  mainloop_func_t old_loop = ble_handle_events;
+  ble_handle_events = new_loop;
+  return old_loop;
 }

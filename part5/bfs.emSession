@@ -1,7 +1,7 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+ <Breakpoints groups="V7M Exceptions;Breakpoints" active_group="Breakpoints">
   <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -26,6 +26,8 @@
   <ProjectSessionItem path="bfs;bfs;CMSIS Files"/>
   <ProjectSessionItem path="bfs;bfs;Segger RTT"/>
   <ProjectSessionItem path="bfs;bfs;Source Files"/>
+  <ProjectSessionItem path="bfs;bfs;Source Files;Config"/>
+  <ProjectSessionItem path="bfs;bfs;Source Files;Core"/>
   <ProjectSessionItem path="bfs;bfs;Source Files;Helpers"/>
   <ProjectSessionItem path="bfs;bfs;System Files"/>
  </Project>
@@ -63,25 +65,16 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="18" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_handler.cc" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="flash_placement.xml" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="22" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_adv.cc" selected="0" top="4" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="11" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_adv_data.cc" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="19" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="adv_helper.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="uuids.cc" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="14" useTextEdit="1" openedFrom="/Users/brian/src/ble-from-scratch/part4/ble_handler.cc" useBinaryEdit="0" left="0" path="err_handler.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Output/Release/Exe/bfs.map" selected="0" top="2366" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="uuids.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_adv_data.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="14" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_adv.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="0" openedFrom="" useBinaryEdit="0" left="0" path="Output/Release/Obj/bfs/ble_adv_data.o" selected="0" top="0" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="34" y="104" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="DeviceInfo.cc" selected="1" top="93" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="3" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="DeviceInfo.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="79" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="main.cc" selected="0" top="66" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_handler.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="0" openedFrom="" useBinaryEdit="0" left="0" path="Output/Debug/Obj/bfs/DeviceInfo.o" selected="0" top="0" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="36" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="err_handler.cc" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="95" useTextEdit="1" openedFrom="/Users/brian/src/ble-from-scratch/part4/ble_handler.cc" useBinaryEdit="0" left="0" path="../../ext/nRF5_SDK_17.0.2_d674dde/components/softdevice/s112/headers/ble_gatts.h" selected="0" top="62" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="102" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="main.cc" selected="1" top="62" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="89" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ui_service.cc" selected="0" top="57" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="3" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ui_service.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="85" useTextEdit="1" openedFrom="/Users/brian/src/ble-from-scratch/part5/ui_service.cc" useBinaryEdit="0" left="0" path="nRF/CMSIS/Device/Include/nrf52.h" selected="0" top="62" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="415" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="nRF/Source/ses_nrf52_Vectors.s" selected="0" top="380" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="29" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="flash_placement.xml" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="13" y="15" useTextEdit="1" openedFrom="/Users/brian/src/ble-from-scratch/part5/ui_service.cc" useBinaryEdit="0" left="0" path="ble_handler.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="226" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_handler.cc" selected="0" top="186" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="469" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../ext/nRF5_SDK_17.0.2_d674dde/components/softdevice/s112/headers/nrf_nvic.h" selected="0" top="442" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="54" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="SEGGER_RTT_SES.c" selected="0" top="3" codecName=""/>
  </Files>
- <ARMCrossStudioWindow activeProject="bfs" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="C:/Users/brian/src/ble-from-scratch/part2a/nRF/Source/ses_nRF_Startup.s&#xa;C:/Users/brian/src/ble-from-scratch/part2/nRF/Source/ses_nRF_Startup.s" fileDialogInitialDirectory="C:/Users/brian/src/ble-from-scratch/part3" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="bfs" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="C:/Users/brian/src/ble-from-scratch/part2a/nRF/Source/ses_nRF_Startup.s&#xa;C:/Users/brian/src/ble-from-scratch/part2/nRF/Source/ses_nRF_Startup.s" fileDialogInitialDirectory="C:/Users/brian/src/ble-from-scratch/part3" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>
