@@ -1,0 +1,33 @@
+The persistent store is a long list of (variable or fixed size) records. A record at least have a 3 byte header:
+
+struct {
+  uint16_t ID;
+  uint16_t FLETCHER-16
+  uint8_t rec_type;
+  uint8_t pad;
+  uint16_t length;
+  uint32_t payload[];
+} __align__(4)
+
+
+Record descriptors are registered in a fixed length array so that rec_type
+can be used to look it up
+
+This makes it possible to traverse the entire persistent store without explicit length
+fields being present.
+
+ID is unique across the entire persistent store and increasing (to save memory we don't have a per-record-type ID). The increasing feature allows for fast indexing and search-by-id making relationships fast.
+
+The store is backed by one or more flash pages
+
+Adding data to the store is done by appending new records to the end of the store. As long as there is room in the flash page(s) we can do this without erasing (and thereby wearing) the pages. Deletion is done by setting the ID to 0 in the flash (again this can be done by programming without deleting). Only when we run out of flash space, we need to compact the database.
+
+The light-weight deletion is why we have an 8-byte header for each record. We can only clear 4 bytes at a time, and they need to be 4-aligned, so when we want 2 bytes for ID and have to keep the record type, we have to pad with two other bytes so that only the ID gets deleted. Hence we have the structure shown in the beginning.
+
+Compaction means deleting all records with ID 0, move data down and re-assign IDs to clear them up also. The indices needs to be rebuilt at the same time. After this the data is committed to another set of flash pages (to have backup).
+
+First 32 bit on the page will be a counter so that the latest active page can be found.
+
+
+
+
