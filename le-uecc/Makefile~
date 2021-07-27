@@ -1,0 +1,4 @@
+CFLAGS += -O1
+CXXFLAGS += -O1
+
+le_test : le_test.o le_testdata.o uECC.o
