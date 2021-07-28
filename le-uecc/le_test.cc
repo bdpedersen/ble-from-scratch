@@ -3,8 +3,11 @@
 #include <cstring>
 #include <cstdio>
 #include "../krang/krang.hh"
+#include "le_keygen_uecc.hh"
 
 krang::Krang rng;
+
+using namespace bfs;
 
 // Adaptor function for the rng
 int uecc_rng(uint8_t *dest, unsigned size){
@@ -102,4 +105,89 @@ int main(void){
  
     }
   }
+
+  auto alice = bfs::LEKeygen_uECC();
+  auto bob = bfs::LEKeygen_uECC();
+  auto xeed = bfs::NullSeed();
+  
+  for (int i=0; i < 2 ; i++){
+    alice.DEBUG_set_private_key((const uint8_t *)&priv_A[i]);
+    bob.DEBUG_set_private_key((const uint8_t *)&priv_B[i]);
+
+    pubkey_t pub_buf;
+    dhkey_t secret;
+    
+    memcpy(&pub_buf.value[0],&pub_Ax[i][0], 32);
+    memcpy(&pub_buf.value[32],&pub_Ay[i][0], 32);
+
+    
+    if (!bob.shared_secret(secret,pub_buf)) printf("Bob failed to compute the secret at all\n");
+    if (0==memcmp(secret.value,&dhkey[i][0],32)){
+      printf("Bob successfully computed the secret, index %d\n",i);
+    }else{
+      printf("Bob failed to compute the secret correctly, index %d\n",i);
+    }
+    
+    memcpy(&pub_buf.value[0],&pub_Bx[i][0], 32);
+    memcpy(&pub_buf.value[32],&pub_By[i][0], 32);
+
+
+    if (!alice.shared_secret(secret,pub_buf)) printf("Alice failed to compute the secret at all\n");
+    if (0==memcmp(secret.value,&dhkey[i][0],32)){
+      printf("Alice successfully computed the secret, index %d\n",i);
+    }else{
+      printf("Alice failed to compute the secret correctly, index %d\n",i);
+    }
+    
+    alice.erase_keyset();
+    alice.gen_keyset(xeed);
+    
+    if (uECC_valid_public_key(alice.public_key().value,P256)){
+      printf("Alices generated public key checked OK\n");
+    }else{
+      printf("Alices generated public key did NOT check OK\n");
+    }
+
+    bob.erase_keyset();
+    bob.gen_keyset(xeed);
+
+    if (uECC_valid_public_key(bob.public_key().value,P256)){
+      printf("Bobs generated public key checked OK\n");
+    }else{
+      printf("Bobs generated public key did NOT check OK\n");
+    }
+
+    dhkey_t bobs_secret, alices_secret;
+    
+
+    if (!bob.shared_secret(bobs_secret,alice.public_key())){
+      printf("Bob couldn't compute his secret\n");
+    }
+
+    if (!alice.shared_secret(alices_secret,bob.public_key())){
+      printf("Bob couldn't compute his secret\n");
+    }
+
+    if (0==memcmp(bobs_secret.value,alices_secret.value,32)){
+      printf("They got the same secret\n");
+    }else{
+      printf("They did NOT get the same secret\n");      
+    }
+
+    if (0==memcmp(bob.public_key().value,alice.public_key().value,64)){
+      printf("Aaargh they had the same key\n");
+    }else{
+      printf("They did NOT get the same keyset - a good thing\n");      
+    }
+
+    
+  }
+
+  for (int i=0;i < 4; i++){
+    irk_t irk;
+    alice.generate_irk(irk,xeed);
+    printhex(irk.value,16);
+    printf("\n");
+  }
+  
 }
