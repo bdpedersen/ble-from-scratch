@@ -30,7 +30,7 @@
       linker_output_format="hex"
       linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
       linker_section_placement_macros="FLASH_START=0x0;FLASH_SIZE=0x80000;RAM_START=0x20000000;RAM_SIZE=0x10000;FLASH_SD=0x19000;RAM_SD=0x3000"
-      macros="DeviceHeaderFile=$(PackagesDir)/nRF/CMSIS/Device/Include/nrf.h;DeviceLibraryIdentifier=M4lf;DeviceSystemFile=$(PackagesDir)/nRF/CMSIS/Device/Source/system_nrf52.c;DeviceVectorsFile=$(PackagesDir)/nRF/Source/ses_nrf52_Vectors.s;DeviceFamily=nRF;Target=nRF52832_xxAA;Placement=Flash;SoftdeviceDir=/Users/brian/src/ext/nRF5_SDK_17.0.2_d674dde/components/softdevice/s112"
+      macros="DeviceHeaderFile=$(PackagesDir)/nRF/CMSIS/Device/Include/nrf.h;DeviceLibraryIdentifier=M4lf;DeviceSystemFile=$(PackagesDir)/nRF/CMSIS/Device/Source/system_nrf52.c;DeviceVectorsFile=$(PackagesDir)/nRF/Source/ses_nrf52_Vectors.s;DeviceFamily=nRF;Target=nRF52832_xxAA;Placement=Flash;SoftdeviceDir=/Users/brian/Documents/src/ext/nRF5_SDK_17.0.2_d674dde/components/softdevice/s112"
       project_directory=""
       project_type="Executable"
       target_reset_script="Reset();"
@@ -70,6 +70,8 @@
         <file file_name="ble_handler.cc" />
         <file file_name="ble_handler.h" />
         <file file_name="ble_adv_data.h" />
+        <file file_name="socevents.cc" />
+        <file file_name="socevents.hh" />
       </folder>
       <folder Name="Config">
         <file file_name="ble_adv_data.cc" />
@@ -81,6 +83,25 @@
         <file file_name="uuids.h" />
         <file file_name="ui_service.h" />
       </folder>
+      <folder Name="Utilities">
+        <file file_name="../le-uecc/le_keygen_uecc.cc" />
+        <file file_name="../le-uecc/le_testdata.cc" />
+        <file file_name="../le-uecc/uECC.c">
+          <configuration Name="Debug" c_preprocessor_definitions="" />
+          <configuration
+            Name="Common"
+            c_preprocessor_definitions="uECC_PLATFORM=5" />
+        </file>
+      </folder>
+      <folder Name="test">
+        <file file_name="test/soctest.cc" />
+      </folder>
+      <folder Name="Flash">
+        <file file_name="../fdb/fdb.cc" />
+        <file file_name="nrfstorage.cc" />
+        <file file_name="../fdb/fdb.hh" />
+        <file file_name="nrfstorage_init.cc" />
+      </folder>
     </folder>
     <folder Name="System Files">
       <file file_name="thumb_crt0.s" />
@@ -91,7 +112,7 @@
     </folder>
     <configuration
       Name="Debug"
-      gcc_cplusplus_language_standard="gnu++14"
+      gcc_cplusplus_language_standard="gnu++17"
       gcc_optimization_level="Debug" />
     <configuration
       Name="Release"
@@ -109,4 +130,8 @@
     gcc_debugging_level="None"
     gcc_omit_frame_pointer="Yes"
     gcc_optimization_level="Level 1" />
+  <configuration
+    Name="Common"
+    arm_keep_assembly="Yes"
+    gcc_cplusplus_language_standard="gnu++17" />
 </solution>

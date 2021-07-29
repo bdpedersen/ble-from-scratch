@@ -13,6 +13,7 @@
     <ProgramSection alignment="4" load="Yes" runin=".fast_run" name=".fast" />
     <ProgramSection alignment="4" load="Yes" runin=".data_run" name=".data" />
     <ProgramSection alignment="4" load="Yes" runin=".tdata_run" name=".tdata" />
+    <ProgramSection start="$(FLASH_SIZE)-8192" load="yes" name=".persistent_store" size="8192"/>
   </MemorySegment>
   <MemorySegment name="RAM" start="$(RAM_START)" size="$(RAM_SIZE)">
     <ProgramSection load="no" name=".reserved_ram" start="$(RAM_START)" size="$(RAM_SD)" />

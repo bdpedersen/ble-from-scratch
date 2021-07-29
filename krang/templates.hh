@@ -38,7 +38,6 @@ namespace krang {
     n&=63; if (n==0) return x; return (x << n) | (x >> (64-n));
   }
   
-  extern const uint64_t RC[24];
 }
 
 

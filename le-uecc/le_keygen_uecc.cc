@@ -2,7 +2,7 @@
 #include <cstring>
 #include "../krang/krang.hh"
 
-static krang::Krang rng;
+krang::Krang rng;
 
 // Adaptor function for the rng
 static int uecc_rng(uint8_t *dest, unsigned size){

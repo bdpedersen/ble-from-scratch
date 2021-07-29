@@ -1,7 +1,7 @@
 #ifndef __fdb_hh
 #define __fdb_hh
 
-#include <memory>
+#include <cstring>
 #include <cstdint>
 
 

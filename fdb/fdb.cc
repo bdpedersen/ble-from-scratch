@@ -1,8 +1,9 @@
 #include "fdb.hh"
 #include <cstdint>
-#include <alloca.h>
+#include "bfs_alloca.h"
 #include <assert.h>
-#include <memory.h>
+#include <cstring>
+#include <cstdio>
 
 namespace FDB
 {
@@ -65,8 +66,13 @@ namespace FDB
             }else{
                 if (p1idx > p0idx){
                     status.active_page = 1;
-                }else{
+                }else if (p1idx < p0idx){
                     status.active_page = 0;
+                }else{
+                  // Something went terribly wrong - we need to start from scratch
+                  storage.ErasePage(0);
+                  storage.ErasePage(1);
+                  p0idx = p1idx = NOT_FOUND;
                 }
             }
         }
@@ -79,7 +85,6 @@ namespace FDB
         bool records_broken = false;
         status.last_used_ID = 0;
         while (item->ID != NOT_FOUND){
-            const DataItem *item = reinterpret_cast<const DataItem *>(dptr);
             if (!item->CheckAdler16()){
                 // Delete this broken record - trust that length is right, otherwise remaining records will 
                 // break anyway.
@@ -91,6 +96,7 @@ namespace FDB
             int offs = sizeof(DataItem)/sizeof(uint32_t)+item->length;
             first_free += offs;
             dptr += offs;
+            item = reinterpret_cast<const DataItem *>(dptr);
         }
         // Check that the rest of the page is clear - otherwise compact the database to purge records that are broken
         const uint32_t *end = storage.Data()+((1&status.active_page)+1)*storage.PageSize();

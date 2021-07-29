@@ -52,6 +52,7 @@ Purpose : Generic application start
 
 #include "ble_handler.h"
 #include "err_handler.h"
+#include "test/soctest.hh"
 
 #include <nrf_sdm.h>
 
@@ -90,7 +91,9 @@ int main(void) {
 
   CHK_ERR(err);
   INFO("SoftDevice started");
+  //test_le_keygen();
   // Start BLE - found in ble_handler.c
+  test_flash_access();
   ble_start();
   while (1){
     CHK_ERR(sd_app_evt_wait());

@@ -15,11 +15,14 @@ void report_err(const char* file, int line, const char* msg);
 #define CHK_ERR(x) do{int _err_ = x; if (_err_ != NRF_SUCCESS){print_err(__FILE__,__LINE__,_err_); while(1);}} while(0)
 #define REPORT_ERR(x) do{report_err(__FILE__,__LINE__,x); while(1);} while(0)
 #define INFO(x) printf("INFO: %s:%d: %s\n",__FILE__,__LINE__,x)
+#define INFO1(x,i) do{ char _str[80]; sprintf(_str,x,i); INFO(_str);}while(0)
+
 #else
 #define CHK(x,msg)
 #define CHK_ERR(x) if (x != NRF_SUCCESS) sd_nvic_SystemReset()
 #define REPORT_ERR(x) sd_nvic_SystemReset()
 #define INFO(x)
+#define INFO1(x,i)
 #endif
 
 #endif
